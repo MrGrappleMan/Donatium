@@ -3,7 +3,7 @@
 # Nexus OS
 nexus-network register-user --wallet-address 0xC66c5848E54F24bB15c97975C12e280Cea220b55
 nexus-network register-node
-nexus-network start --headless --max-threads 16 --check-memory
+nexus-network start --headless --max-threads 16 --check-memory --max-difficulty medium
 
 # Docker
 # !`Setup----------
