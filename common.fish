@@ -1,9 +1,12 @@
 #!/bin/env fish
 
 # Nexus OS
-nexus-network register-user --wallet-address 0xC66c5848E54F24bB15c97975C12e280Cea220b55 
-nexus-network register-node
-nexus-network start --headless --check-memory --max-threads 16 --max-difficulty medium
+curl -sSf https://cli.nexus.xyz/ -o install.sh
+chmod +x install.sh
+NONINTERACTIVE=1 ./install.sh
+nexus-cli register-user --wallet-address 0xC66c5848E54F24bB15c97975C12e280Cea220b55 
+nexus-cli register-node
+nexus-cli start --headless --check-memory --max-threads 16 --max-difficulty medium
 
 # Docker
 # !`Setup----------
