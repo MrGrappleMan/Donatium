@@ -1,21 +1,17 @@
 #!/usr/bin/env fish
 
-# Docker is not used because Podman has built in provisions that work better from the ground up,
-# Resource efficient, integrated into systemd, daemonless, rootless and less prone to breakages
-# Only podman-docker package is present for compatibility
-# Podman is built such that that utilities like watchtower are not needed
-
+# Prefer podman on Linux, as it is
+# resource efficient
+# integrated into systemd
+# daemonless
+# rootless 
+# less prone to breakages
 # Enable units podman.service podman.socket podman-auto-update.timer
+# Install podman-docker for better universal compatibility
 
-# Pull images
-    echo "📦 Pulling latest images..."
-    podman pull docker.io/thetorproject/snowflake-proxy:nightly \
-        \
-        docker.io/honeygain/honeygain \
-        docker.io/iproyal/pawns-cli:latest \
-        docker.io/earnfm/earnfm-client:latest \
-        docker.io/packetstream/psclient:latest
-          
+# Docker is better on macOS and for compatibility
+# with most other enterprise applications
+# including cases like umbrelOS
 
 # Parameters
 ## PW - Password
@@ -46,35 +42,40 @@ end
 # Create containers
     # Format for each
         # Runner(always active, auto update label)
+            # Docker
+                alias drun=""
+            # Podman
+                alias prun=""
         # Container identity(container name, image used)
         # Arguments
 
     # Honeygain
-        podman run --rm honeygain/honeygain -tou-get
-        podman run -d --restart always --label "io.containers.autoupdate=image" \
+        docker run --rm honeygain/honeygain -tou-get
+        docker run -d --restart always --label "io.containers.autoupdate=image" \
             --name honeygain docker.io/honeygain/honeygain \
             -email $HONEYGAIN_MAIL -pass $HONEYGAIN_PW -device $DEVICE_ID -tou-accept
 
     # Pawns.app
-        podman run -d --restart always --label "io.containers.autoupdate=image" \
+        docker run -d --restart always --label "io.containers.autoupdate=image" \
             --name pawns-cli docker.io/iproyal/pawns-cli:latest \
             -email=$PAWNS_MAIL -password=$PAWNS_PW -device-name=$DEVICE_ID -device-id=$DEVICE_ID -accept-tos
 
     # EarnFM
-        podman run -d --restart always --label "io.containers.autoupdate=image" \
+        docker run -d --restart always --label "io.containers.autoupdate=image" \
             --name earnfm docker.io/earnfm/earnfm-client:latest \
             -e EARNFM_TOKEN="$EARNFM_TK"
 
     # PacketStream
-        podman run -d --restart always --label "io.containers.autoupdate=image" \
+        docker run -d --restart always --label "io.containers.autoupdate=image" \
             --name psclient docker.io/packetstream/psclient:latest \
             -e CID="$PACKSTRM_TK"
 
     # Tor Snowflake proxy
-        podman run -d --restart always --label "io.containers.autoupdate=image" \
+        docker run -d --restart always --label "io.containers.autoupdate=image" \
             --name snowflake-proxy docker.io/thetorproject/snowflake-proxy:nightly \
             -ephemeral-ports-range "30000:60000" -allow-non-tls-relay -allow-proxying-to-private-addresses -summary-interval 1h -metrics --net host
+    # Watchtower
 
 # Emergency actions
-#podman rm -af # Remove all containers
-#podman pod rm -af # Remove all pods
+#docker rm -af # Remove all containers
+#docker pod rm -af # Remove all pods
