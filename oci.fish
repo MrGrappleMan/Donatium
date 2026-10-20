@@ -1,16 +1,13 @@
 #!/usr/bin/env fish
 
-# Prefer podman on Linux, as it is
-# resource efficient
-# integrated into systemd
-# daemonless
-# rootless 
-# less prone to breakages
+# Use podman as,
+# resource efficient, integrated into systemd, daemonless
+# rootless, less prone to breakages
 # Enable units podman.service podman.socket podman-auto-update.timer
 
-# Docker is better on macOS and for compatibility
-# with most other enterprise applications
-# including cases like umbrelOS
+# Avoid Docker as,
+# old, compatibility focused, propreitary
+# more overhead, more setup complexity
 
 # Parameters
 ## PW - Password
