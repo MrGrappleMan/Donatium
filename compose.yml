@@ -1,0 +1,64 @@
+name: bandwidth-sharing-stack
+
+services:
+  honeygain:
+    image: docker.io/honeygain/honeygain:latest
+    container_name: honeygain
+    restart: always
+    labels:
+      - io.containers.autoupdate=image
+    command:
+      - -email
+      - "${HONEYGAIN_MAIL:-YOUR_HONEYGAIN_MAIL}"
+      - -pass
+      - "${HONEYGAIN_PW:-YOUR_HONEYGAIN_PASSWORD}"
+      - -device
+      - "${DEVICE_ID:-YOUR_DEVICE_ID}"
+      - -tou-accept
+
+  pawns-cli:
+    image: docker.io/iproyal/pawns-cli:latest
+    container_name: pawns-cli
+    restart: always
+    labels:
+      - io.containers.autoupdate=image
+    command:
+      - -email=${PAWNS_MAIL:-YOUR_PAWNS_MAIL}
+      - -password=${PAWNS_PW:-YOUR_PAWNS_PASSWORD}
+      - -device-name=${DEVICE_ID:-YOUR_DEVICE_ID}
+      - -device-id=${DEVICE_ID:-YOUR_DEVICE_ID}
+      - -accept-tos
+
+  earnfm:
+    image: docker.io/earnfm/earnfm-client:latest
+    container_name: earnfm
+    restart: always
+    labels:
+      - io.containers.autoupdate=image
+    environment:
+      EARNFM_TOKEN: "${EARNFM_TK:-YOUR_EARNFM_TOKEN}"
+
+  psclient:
+    image: docker.io/packetstream/psclient:latest
+    container_name: psclient
+    restart: always
+    labels:
+      - io.containers.autoupdate=image
+    environment:
+      CID: "${PACKSTRM_TK:-YOUR_PACKETSTREAM_TOKEN}"
+
+  snowflake-proxy:
+    image: docker.io/thetorproject/snowflake-proxy:nightly
+    container_name: snowflake-proxy
+    restart: always
+    network_mode: host
+    labels:
+      - io.containers.autoupdate=image
+    command:
+      - -ephemeral-ports-range
+      - "30000:60000"
+      - -allow-non-tls-relay
+      - -allow-proxying-to-private-addresses
+      - -summary-interval
+      - 1h
+      - -metrics
