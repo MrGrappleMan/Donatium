@@ -1,6 +1,6 @@
 # Donatium
 
-Let your devices do jobs when they are idle
+Give your devices a j*b
 
 ## Supported operating systems
 
@@ -42,3 +42,33 @@ Cash4Minutes
 McMoney
 Money SMS
 Acurast
+
+## Containerization tools
+
+### Podman
+
+Pros
+- Resource efficiency
+- Systemd integration
+- Daemonless architect
+- Rootless and Rootfull support
+
+Cons
+- Breaks with apps that communicate directly with Docker
+- Niche macOS issues
+
+Enable units podman.socket podman-auto-update.timer
+podman.service not required
+
+### Docker
+
+Pros
+- macOS maturity
+- Guaranteed proprietary app dependency
+- Homelab standard
+
+Cons
+- Legacy architecture
+- Propreitary source
+- Daemon overhead
+- Manual complexity like watchtower
