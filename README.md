@@ -5,6 +5,7 @@ Let your devices do jobs when they are idle
 ## Supported operating systems
 
 - Bluefin Dakotaraptor(or any other atomic distro)
+- Homelab Docker UIs, manually use the compose file and self supply env
 - macOS
 
 ## Services
@@ -19,10 +20,9 @@ These only include services that are meaningfully contributive to a network by
 but not by
 
 - displaying ads
-- maliciously hijacking user credentials
-- performing destructive actions without user consent
-
-<https://scienceunited.org/su_home.php>
+- hijacking user credentials
+- destructive actions
+- artificial product inflation
 
 UpRock
 EarnApp
