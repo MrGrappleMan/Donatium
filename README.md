@@ -2,11 +2,11 @@
 
 Give your devices a j*b
 
-## Supported operating systems
+## Recommended operating systems
 
-- Bluefin Dakotaraptor(or any other atomic distro)
-- Homelab Docker UIs, manually use the compose file and self supply env
+- Bluefin Dakota, or any other modern atomic distro
 - macOS
+- Homelab OCI management UIs, manually use the compose file and self supply env
 
 ## Services
 
@@ -16,32 +16,13 @@ These only include services that are meaningfully contributive to a network by
 - automated scraping
 - bandwidth sharing
 - AI inference
+- Displaying ads that are not too intrusive
 
 but not by
 
-- displaying ads
 - hijacking user credentials
-- destructive actions
+- unethical destructive actions
 - artificial product inflation
-
-UpRock
-EarnApp
-EarnFM
-SurveySavvy
-Pawns.App
-Honeygain
-DATS Project
-KOII Node
-Snowflake Proxy
-Tor Relays
-Traffmonetizer
-PacketShare
-PacketStream
-Repocket
-Cash4Minutes
-McMoney
-Money SMS
-Acurast
 
 ## Containerization tools
 
